@@ -16,7 +16,7 @@
 
 services:
   - type: web
-    name: airtrack-site
+    name: airtrack-ci
     runtime: docker
     plan: free
     region: frankfurt # région Render la plus proche d'Abidjan
