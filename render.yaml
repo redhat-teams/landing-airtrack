@@ -20,9 +20,9 @@ services:
     runtime: docker
     plan: free
     region: frankfurt # région Render la plus proche d'Abidjan
-    rootDir: site-vitrine
-    dockerfilePath: ./site-vitrine/Dockerfile
-    dockerContext: ./site-vitrine
+    rootDir: ./
+    dockerfilePath: ./
+    dockerContext: ./
     healthCheckPath: /api/health/
     autoDeploy: true
     # --- Données persistantes (plan starter ou supérieur) ---
