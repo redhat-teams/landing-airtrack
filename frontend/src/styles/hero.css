@@ -1,0 +1,797 @@
+/* ---------- Navigation ---------- */
+.nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 50;
+  padding: 14px var(--gutter);
+  transition: padding 0.3s var(--ease-out);
+}
+.nav__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  padding: 10px 12px 10px 18px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+.nav--scrolled .nav__inner,
+.nav--open .nav__inner {
+  background: rgba(6, 23, 51, 0.92);
+  border-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(18px) saturate(1.4);
+  box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.5);
+}
+.nav__brand {
+  text-decoration: none;
+  margin-right: auto;
+}
+.nav__links {
+  display: flex;
+  gap: 28px;
+}
+.nav__links a {
+  color: rgba(255, 255, 255, 0.82);
+  text-decoration: none;
+  font-weight: 550;
+  font-size: 0.95rem;
+  transition: color 0.2s;
+}
+.nav__links a:hover {
+  color: #fff;
+}
+.nav__cta {
+  min-height: 42px;
+}
+.nav__burger {
+  display: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 0;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  place-items: center;
+  cursor: pointer;
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  background: var(--night);
+  color: #fff;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+.hero__map {
+  position: absolute;
+  inset: 0;
+}
+.hero__map .citymap {
+  width: 100%;
+  height: 100%;
+}
+.hero__veil {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(6, 23, 51, 0.94) 0%, rgba(6, 23, 51, 0.78) 34%, rgba(6, 23, 51, 0.15) 62%, rgba(6, 23, 51, 0.35) 100%),
+    linear-gradient(180deg, rgba(6, 23, 51, 0.6) 0%, rgba(6, 23, 51, 0) 22%, rgba(6, 23, 51, 0) 78%, rgba(6, 23, 51, 0.95) 100%);
+}
+.hero__inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 130px var(--gutter) 90px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+  gap: 40px;
+  align-items: center;
+}
+.hero__kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 22px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--navy-pale);
+}
+.hero__title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.9rem, 6.6vw, 5.6rem);
+  line-height: 0.95;
+  letter-spacing: -0.028em;
+  margin: 0 0 26px;
+  max-width: 11ch;
+  text-wrap: balance;
+}
+/* Le point final est la pastille verte « en ligne » du logo, qui pulse. */
+.hero__period {
+  display: inline-block;
+  width: 0.2em;
+  height: 0.2em;
+  margin-left: 0.06em;
+  border-radius: 50%;
+  background: var(--green-bright);
+  vertical-align: baseline;
+  box-shadow: 0 0 0 0 rgba(43, 194, 102, 0.6);
+  animation: live 1.6s ease-out infinite;
+}
+.hero__lead {
+  max-width: 50ch;
+  font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+  color: rgba(255, 255, 255, 0.78);
+  margin: 0 0 34px;
+}
+.hero__pay {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+.hero__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.hero__device {
+  position: relative;
+  justify-self: center;
+  width: 330px;
+  height: 660px;
+  display: grid;
+  place-items: center;
+}
+.hero__float {
+  position: relative;
+  z-index: 2;
+  animation: float 7s ease-in-out infinite;
+}
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-1.5deg);
+  }
+  50% {
+    transform: translateY(-14px) rotate(0.5deg);
+  }
+}
+
+/* Orbite des catégories autour du téléphone */
+.orbit {
+  position: absolute;
+  inset: -40px -110px;
+  pointer-events: none;
+}
+.orbit__ring {
+  position: absolute;
+  inset: 8% 0;
+  border: 1.5px dashed rgba(157, 184, 245, 0.28);
+  border-radius: 50%;
+}
+.orbit__ring--2 {
+  inset: 22% 14%;
+  border-color: rgba(232, 101, 10, 0.22);
+  animation: spin 60s linear infinite reverse;
+}
+.orbit__spin {
+  position: absolute;
+  inset: 8% 0;
+  animation: spin 38s linear infinite;
+}
+.orbit__item {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  transform: rotate(calc(360deg / var(--n) * var(--i))) translateX(min(270px, 42vw));
+}
+.orbit__bubble {
+  position: absolute;
+  width: 56px;
+  height: 56px;
+  margin: -28px;
+  display: grid;
+  place-items: center;
+  font-size: 26px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 14px 30px -10px rgba(0, 0, 0, 0.5), 0 0 0 6px rgba(255, 255, 255, 0.06);
+  transform: rotate(calc(-360deg / var(--n) * var(--i)));
+  animation: counter 38s linear infinite;
+}
+@keyframes counter {
+  from {
+    rotate: 0deg;
+  }
+  to {
+    rotate: -360deg;
+  }
+}
+
+/* Notifications d'alerte qui surgissent à côté du téléphone */
+.toasts {
+  position: absolute;
+  z-index: 3;
+  top: 84px;
+  left: -190px;
+  width: 290px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+}
+.toast {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 12px 14px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.96);
+  color: var(--ink);
+  box-shadow: 0 24px 50px -18px rgba(0, 0, 0, 0.55);
+}
+.toast__icon {
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 11px;
+  display: grid;
+  place-items: center;
+  background: var(--orange-soft);
+  color: var(--orange);
+}
+.toast--battery .toast__icon {
+  background: #fef3c7;
+  color: var(--warning);
+}
+.toast--speed .toast__icon {
+  background: #feecec;
+  color: var(--danger);
+}
+.toast__text {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.875rem;
+  line-height: 1.35;
+}
+.toast__text strong {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 0.875rem;
+  color: var(--navy-dark);
+}
+.toast__text time {
+  font-weight: 500;
+  color: var(--subtle);
+}
+
+.hero__scroll {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  bottom: 26px;
+  width: 26px;
+  height: 42px;
+  margin-left: -13px;
+  border-radius: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+}
+.hero__scroll span {
+  position: absolute;
+  left: 50%;
+  top: 8px;
+  width: 4px;
+  height: 8px;
+  margin-left: -2px;
+  border-radius: 2px;
+  background: #fff;
+  animation: scroll-hint 1.8s var(--ease-out) infinite;
+}
+@keyframes scroll-hint {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(14px);
+    opacity: 0;
+  }
+}
+
+/* ---------- Carte SVG ---------- */
+.citymap__streets {
+  stroke: rgba(157, 184, 245, 0.075);
+  stroke-width: 1.2;
+  fill: none;
+}
+.citymap__road {
+  stroke: rgba(157, 184, 245, 0.2);
+  stroke-width: 3.2;
+  fill: none;
+  stroke-linecap: round;
+}
+.citymap__lagoon {
+  stroke: rgba(157, 184, 245, 0.22);
+  stroke-width: 1.5;
+}
+.citymap__ripples {
+  fill: none;
+  stroke: rgba(157, 184, 245, 0.14);
+  stroke-width: 1;
+  stroke-dasharray: 2 14;
+  animation: ripple 18s linear infinite;
+}
+@keyframes ripple {
+  to {
+    stroke-dashoffset: -400;
+  }
+}
+.citymap__coast {
+  fill: none;
+  stroke: rgba(157, 184, 245, 0.35);
+  stroke-width: 2;
+}
+.citymap__bridge {
+  stroke: rgba(255, 255, 255, 0.4);
+  stroke-width: 6;
+  stroke-linecap: round;
+}
+.citymap__district {
+  font-family: var(--font-body);
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  fill: rgba(255, 255, 255, 0.32);
+}
+.citymap__water-label {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 20px;
+  fill: rgba(157, 184, 245, 0.45);
+}
+.citymap__route {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.07);
+  stroke-width: 3;
+  stroke-dasharray: 3 9;
+}
+.citymap__trail {
+  fill: none;
+  stroke-width: 4;
+  stroke-linecap: round;
+  opacity: 0.95;
+}
+.citymap__trail-glow {
+  fill: none;
+  stroke-width: 12;
+  stroke-linecap: round;
+  opacity: 0.45;
+}
+.geofence__fill {
+  fill: rgba(232, 101, 10, 0.09);
+}
+.geofence__ring {
+  fill: none;
+  stroke: rgba(232, 101, 10, 0.75);
+  stroke-width: 2.5;
+  stroke-dasharray: 10 8;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: spin 30s linear infinite;
+}
+.marker__pulse {
+  opacity: 0.35;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: marker-pulse 2.2s ease-out infinite;
+}
+@keyframes marker-pulse {
+  0% {
+    transform: scale(0.55);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+.marker__emoji {
+  font-size: 19px;
+}
+.marker__label rect {
+  fill: rgba(6, 23, 51, 0.82);
+  stroke: rgba(255, 255, 255, 0.14);
+}
+.marker__name {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 650;
+  fill: #fff;
+}
+.marker__speed {
+  fill: #ff9a52;
+}
+.marker__state {
+  fill: rgba(255, 255, 255, 0.6);
+  font-weight: 500;
+}
+.citymap--phone .citymap__world {
+  transition: transform 1.1s var(--ease-out);
+}
+.citymap--phone .citymap__district {
+  font-size: 30px;
+}
+
+/* ---------- Téléphone ---------- */
+.phone {
+  width: 300px;
+  height: 620px;
+  padding: 10px;
+  border-radius: 48px;
+  background: linear-gradient(145deg, #2b3245, #0c1020 60%);
+  box-shadow:
+    0 0 0 1.5px rgba(255, 255, 255, 0.12),
+    0 50px 100px -30px rgba(0, 0, 0, 0.8),
+    0 0 120px -20px rgba(30, 79, 163, 0.6);
+}
+.phone__screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 39px;
+  overflow: hidden;
+  background: var(--night);
+}
+.phone__screen > .citymap {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.phone__status {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 40px;
+  padding: 0 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+}
+.phone__island {
+  width: 86px;
+  height: 24px;
+  border-radius: 14px;
+  background: #000;
+}
+.phone__signal {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  font-size: 11px;
+}
+.phone__signal i {
+  width: 3px;
+  background: #fff;
+  border-radius: 1px;
+}
+.phone__signal i:nth-child(1) {
+  height: 4px;
+}
+.phone__signal i:nth-child(2) {
+  height: 6px;
+}
+.phone__signal i:nth-child(3) {
+  height: 8px;
+}
+.phone__signal i:nth-child(4) {
+  height: 10px;
+  margin-right: 3px;
+}
+.phone__header {
+  position: absolute;
+  top: 46px;
+  left: 12px;
+  right: 12px;
+  padding: 8px 10px;
+  border-radius: 16px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.4);
+}
+.phone__icons {
+  display: flex;
+  gap: 8px;
+  color: var(--ink);
+}
+.phone__icons svg {
+  width: 26px;
+  height: 26px;
+  padding: 6px;
+  border-radius: 50%;
+  background: var(--field);
+}
+.phone__sheet {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 330px;
+  padding: 8px 12px 0;
+  border-radius: 26px 26px 0 0;
+  background: var(--mist);
+  box-shadow: 0 -12px 30px -10px rgba(0, 0, 0, 0.4);
+  color: var(--ink);
+}
+.phone__grip {
+  display: block;
+  width: 38px;
+  height: 4px;
+  margin: 0 auto 10px;
+  border-radius: 2px;
+  background: #d1d5db;
+}
+.phone__sheet-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4px 10px;
+}
+.phone__sheet-head strong {
+  font-family: var(--font-display);
+  font-size: 17px;
+  letter-spacing: -0.02em;
+}
+.online-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: var(--green-soft);
+  color: var(--green);
+  font-size: 11px;
+  font-weight: 700;
+}
+.online-badge__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  animation: dot-pulse 1.4s ease-in-out infinite;
+}
+.phone__list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Carte tracker enrichie (même dessin que l'app) */
+.tcard {
+  position: relative;
+  display: flex;
+  gap: 9px;
+  padding: 9px 10px 9px 14px;
+  border-radius: 14px;
+  background: #fff;
+  border: 1.5px solid var(--line);
+  overflow: hidden;
+  transition: background-color 0.35s, border-color 0.35s, transform 0.35s var(--ease-out);
+  box-shadow: 0 4px 10px -6px rgba(11, 60, 140, 0.2);
+}
+.tcard--selected {
+  background: var(--orange-soft);
+  border-color: var(--orange);
+  transform: scale(1.015);
+}
+.tcard__accent {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+}
+.tcard__emoji {
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+  background: var(--field);
+}
+.tcard__emoji--on {
+  background: var(--green-soft);
+}
+.tcard__body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.tcard__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+.tcard__name {
+  font-weight: 700;
+  font-size: 12.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.tcard__row--meta {
+  font-size: 11px;
+}
+.tcard__speed {
+  color: var(--orange);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.tcard__muted {
+  color: var(--muted);
+  font-size: 11px;
+}
+.tcard__low {
+  color: var(--danger);
+  font-size: 11px;
+  font-weight: 700;
+}
+.tcard__battery {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.tcard__bar {
+  flex: 1;
+  max-width: 110px;
+  height: 5px;
+  border-radius: 999px;
+  background: var(--field);
+  overflow: hidden;
+}
+.tcard__bar span {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.6s, background-color 0.6s;
+}
+.pill {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: var(--field);
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 650;
+}
+.pill__dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--subtle);
+}
+.pill--on {
+  background: var(--green-soft);
+  color: var(--green);
+}
+.pill--on .pill__dot {
+  background: var(--green);
+}
+
+/* ---------- Responsive hero ---------- */
+@media (max-width: 1080px) {
+  .toasts {
+    left: -120px;
+    width: 260px;
+  }
+}
+@media (max-width: 960px) {
+  .nav__links,
+  .nav__cta {
+    display: none;
+  }
+  .nav__burger {
+    display: grid;
+  }
+  .nav--open .nav__inner {
+    flex-wrap: wrap;
+    border-radius: 26px;
+  }
+  .nav--open .nav__links {
+    display: flex;
+    flex-direction: column;
+    order: 3;
+    width: 100%;
+    gap: 4px;
+    padding: 10px 6px 6px;
+  }
+  .nav--open .nav__links a {
+    padding: 10px 6px;
+    font-size: 1.05rem;
+  }
+  .nav--open .nav__cta {
+    display: inline-flex;
+    order: 4;
+    width: 100%;
+    margin-bottom: 6px;
+  }
+  .hero__inner {
+    grid-template-columns: 1fr;
+    padding-top: 120px;
+    gap: 60px;
+  }
+  .hero__veil {
+    background: linear-gradient(180deg, rgba(6, 23, 51, 0.92) 0%, rgba(6, 23, 51, 0.7) 45%, rgba(6, 23, 51, 0.4) 70%, rgba(6, 23, 51, 0.95) 100%);
+  }
+  .toasts {
+    left: 50%;
+    top: auto;
+    bottom: -14px;
+    width: min(320px, 92vw);
+    transform: translateX(-50%);
+  }
+  .hero__scroll {
+    display: none;
+  }
+  /* Sur mobile la carte sert de texture : sans étiquettes, plus discrète derrière le texte. */
+  .hero__map .marker__label,
+  .hero__map .citymap__district,
+  .hero__map .citymap__water-label {
+    display: none;
+  }
+  .hero__map {
+    opacity: 0.75;
+  }
+}
+@media (max-width: 480px) {
+  .hero__device {
+    width: 100%;
+    height: 600px;
+  }
+  .hero__float {
+    transform-origin: top center;
+  }
+  .phone {
+    transform: scale(0.92);
+  }
+  .orbit {
+    inset: -20px -10px;
+  }
+  .orbit__bubble {
+    width: 46px;
+    height: 46px;
+    margin: -23px;
+    font-size: 21px;
+  }
+  .stores .store {
+    flex: 1 1 100%;
+  }
+}

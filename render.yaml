@@ -1,0 +1,85 @@
+# ============================================================================
+# AirTrack : site vitrine (React + Vite + Django + SQLite) en Blueprint Render
+#
+# Render > New > Blueprint > ce dépôt > « Blueprint file path » : site-vitrine/render.yaml
+# (le render.yaml à la racine du dépôt reste celui du backend de l'application).
+# Si le site est poussé seul dans son propre dépôt : retirer « site-vitrine/ » des trois chemins ci-dessous.
+#
+# Un seul service web : le Dockerfile construit le React puis Django le sert avec l'API et l'admin.
+# Variables `sync: false` : demandées à la création du Blueprint, vous pouvez les laisser vides
+# et les remplir plus tard (Environment) ; les liens de téléchargement s'activent sans redéploiement du code.
+#
+# SQLite et plan free : le disque du service free est effacé à chaque redéploiement ou redémarrage
+# (abonnés newsletter et historique perdus). Pour garder les données, passez en plan starter
+# et décommentez le bloc « disk » + SQLITE_PATH plus bas.
+# ============================================================================
+
+services:
+  - type: web
+    name: airtrack-site
+    runtime: docker
+    plan: free
+    region: frankfurt # région Render la plus proche d'Abidjan
+    rootDir: site-vitrine
+    dockerfilePath: ./site-vitrine/Dockerfile
+    dockerContext: ./site-vitrine
+    healthCheckPath: /api/health/
+    autoDeploy: true
+    # --- Données persistantes (plan starter ou supérieur) ---
+    # disk:
+    #   name: airtrack-site-data
+    #   mountPath: /var/data
+    #   sizeGB: 1
+    envVars:
+      - key: DJANGO_DEBUG
+        value: "0"
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      # - key: SQLITE_PATH            # avec le disque ci-dessus
+      #   value: /var/data/db.sqlite3
+
+      # Assistant IA (Claude). Vide = réponses depuis la FAQ intégrée.
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: AI_MODEL
+        value: claude-haiku-5-5
+
+      # Liens de téléchargement (vide = bouton « Bientôt »)
+      - key: APK_URL
+        sync: false
+      - key: PLAY_STORE_URL
+        sync: false # ex. https://play.google.com/store/apps/details?id=com.airtrack.ci
+      - key: APP_STORE_URL
+        sync: false
+
+      # Contact affiché sur le site et donné par l'assistant
+      - key: SUPPORT_EMAIL
+        value: support@airtrack.ci
+      - key: SUPPORT_WHATSAPP
+        sync: false # ex. +2250700000000
+
+      # Compte admin créé au démarrage (/admin/) : newsletter, questions posées, téléchargements
+      - key: DJANGO_SUPERUSER_USERNAME
+        value: admin
+      - key: DJANGO_SUPERUSER_EMAIL
+        sync: false
+      - key: DJANGO_SUPERUSER_PASSWORD
+        sync: false
+
+      # E-mails de la newsletter (SMTP : Brevo, Mailjet, Gmail…). Vide = e-mails dans les logs.
+      - key: EMAIL_HOST
+        sync: false
+      - key: EMAIL_HOST_USER
+        sync: false
+      - key: EMAIL_HOST_PASSWORD
+        sync: false
+      - key: DEFAULT_FROM_EMAIL
+        value: AirTrack <newsletter@airtrack.ci>
+
+      # Domaine personnalisé (ex. airtrack.ci) : à ajouter ici en plus de l'adresse .onrender.com
+      # - key: DJANGO_ALLOWED_HOSTS
+      #   value: airtrack.ci,www.airtrack.ci
+      # - key: CSRF_TRUSTED_ORIGINS
+      #   value: https://airtrack.ci,https://www.airtrack.ci
+      # - key: PUBLIC_SITE_URL
+      #   value: https://airtrack.ci

@@ -1,0 +1,346 @@
+/* Charte AirTrack (identique à l'app : navy, orange, vert « en ligne ») + une nuit d'Abidjan pour les sections sombres. */
+:root {
+  --night: #061733;
+  --night-2: #0a2350;
+  --navy: #0b3c8c;
+  --navy-dark: #082c68;
+  --navy-light: #1e4fa3;
+  --navy-soft: #e8eef9;
+  --navy-pale: #9db8f5;
+  --orange: #e8650a;
+  --orange-dark: #c95506;
+  --orange-soft: #fff3ea;
+  --green: #1e9e4a;
+  --green-bright: #2bc266;
+  --green-soft: #e8f6ee;
+  --danger: #dc2626;
+  --warning: #d97706;
+  --mist: #f6f7fb;
+  --card: #ffffff;
+  --ink: #111827;
+  --muted: #6b7280;
+  --subtle: #9ca3af;
+  --line: #e5e7eb;
+  --field: #f3f4f6;
+
+  /* Polices auto-hébergées (@fontsource) : aucune requête externe, chargement rapide même en 3G. */
+  --font-display: 'Bricolage Grotesque Variable', 'Instrument Sans Variable', system-ui, sans-serif;
+  --font-body: 'Instrument Sans Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --radius-lg: 28px;
+  --radius: 18px;
+  --shadow-navy: 0 24px 60px -24px rgba(11, 60, 140, 0.35);
+  --gutter: clamp(16px, 4vw, 40px);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  background: var(--mist);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+a {
+  color: inherit;
+}
+button,
+input {
+  font: inherit;
+}
+:focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+::selection {
+  background: var(--orange);
+  color: #fff;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+.section {
+  position: relative;
+  padding: clamp(80px, 11vw, 140px) 0;
+}
+.section__lead {
+  max-width: 58ch;
+  color: var(--muted);
+  font-size: 1.125rem;
+  margin: 0 0 40px;
+}
+
+/* Typographie : Bricolage Grotesque pour les titres (serrée, expressive), Instrument Sans pour le texte. */
+.h2 {
+  font-family: var(--font-display);
+  font-weight: 750;
+  font-size: clamp(2.1rem, 4.6vw, 3.6rem);
+  line-height: 1.04;
+  letter-spacing: -0.022em;
+  margin: 0 0 20px;
+  max-width: 18ch;
+  color: var(--navy-dark);
+  text-wrap: balance;
+}
+.h2--sm {
+  font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+  max-width: 16ch;
+}
+.h2--light {
+  color: #fff;
+}
+.h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0 0 12px;
+  color: var(--navy-dark);
+}
+
+/* Boutons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 0 22px;
+  border-radius: 999px;
+  border: 0;
+  font-weight: 650;
+  font-size: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.2s var(--ease-out), background-color 0.2s, box-shadow 0.2s;
+}
+.btn:active {
+  transform: scale(0.97);
+}
+.btn--orange {
+  background: var(--orange);
+  color: #fff;
+  box-shadow: 0 10px 30px -10px rgba(232, 101, 10, 0.7);
+}
+.btn--orange:hover {
+  background: var(--orange-dark);
+}
+.btn--navy {
+  background: var(--navy);
+  color: #fff;
+}
+.btn--navy:hover {
+  background: var(--navy-dark);
+}
+.btn--ghost {
+  background: transparent;
+  color: var(--navy);
+  box-shadow: inset 0 0 0 1.5px var(--navy-soft), inset 0 0 0 1.5px rgba(11, 60, 140, 0.25);
+}
+.btn--ghost:hover {
+  background: var(--navy-soft);
+}
+.btn--block {
+  width: 100%;
+}
+.btn:disabled {
+  opacity: 0.7;
+  cursor: progress;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--navy-dark);
+  white-space: nowrap;
+}
+.chip--glass {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.16);
+  color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
+}
+
+/* Logo : pictogramme de l'app + pastille verte qui pulse */
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--logo-size) * 0.3);
+}
+.logo__mark {
+  position: relative;
+  width: var(--logo-size);
+  height: var(--logo-size);
+  border-radius: calc(var(--logo-size) * 0.28);
+  background: #fff;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 2px 8px rgba(11, 60, 140, 0.18);
+  flex: none;
+}
+.logo__dot {
+  position: absolute;
+  right: 10%;
+  bottom: 10%;
+  width: 30%;
+  height: 30%;
+  border-radius: 50%;
+  background: var(--green);
+  border: 1.5px solid #fff;
+  animation: dot-pulse 1.8s ease-in-out infinite;
+}
+.logo__word {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: calc(var(--logo-size) * 0.62);
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+.logo__air {
+  color: var(--navy);
+}
+.logo--dark .logo__air {
+  color: #fff;
+}
+.logo__track {
+  color: var(--green);
+}
+.logo--dark .logo__track {
+  color: var(--green-bright);
+}
+
+@keyframes dot-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.35);
+  }
+}
+
+/* Boutons de téléchargement */
+.stores {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.store {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 58px;
+  padding: 8px 20px 8px 16px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #fff;
+  text-decoration: none;
+  backdrop-filter: blur(10px);
+  transition: transform 0.25s var(--ease-out), background-color 0.2s, border-color 0.2s;
+}
+.store:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+.store--primary {
+  background: var(--orange);
+  border-color: transparent;
+  box-shadow: 0 14px 36px -12px rgba(232, 101, 10, 0.8);
+}
+.store--primary:hover {
+  background: var(--orange-dark);
+}
+.store__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+.store__text small {
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+.store__text span {
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+.store--soon {
+  cursor: default;
+  opacity: 0.62;
+}
+.store--soon:hover {
+  transform: none;
+}
+.store--soon.store--primary {
+  background: rgba(232, 101, 10, 0.55);
+  box-shadow: none;
+}
+
+.live-dot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--green-bright);
+  box-shadow: 0 0 0 0 rgba(43, 194, 102, 0.7);
+  animation: live 1.6s ease-out infinite;
+}
+@keyframes live {
+  0% {
+    box-shadow: 0 0 0 0 rgba(43, 194, 102, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 0 12px rgba(43, 194, 102, 0);
+  }
+}
+
+.spin {
+  animation: spin 0.9s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
